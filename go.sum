@@ -1,0 +1,10 @@
+github.com/BurntSushi/toml v1.6.0 h1:dRaEfpa2VI55EwlIW72hMRHdWouJeRF7TPYhI+AUQjk=
+github.com/BurntSushi/toml v1.6.0/go.mod h1:ukJfTF/6rtPPRCnwkur4qwRxa8vTRFBF0uk2lLoLwho=
+github.com/Zyko0/go-sdl3 v0.1.1 h1:tXlnEcEJa9eqyzaBpCktOGteJGbUfnvG6ocURdsspHw=
+github.com/Zyko0/go-sdl3 v0.1.1/go.mod h1:LOqUd6DUUkCO/8quWPfovV1Ep/nr/aw0uBT5vdlAIQY=
+github.com/Zyko0/purego-gen v0.0.0-20250727121216-3bcd331a1e0c h1:3z1BdpfvUbaP7oXjPabl7STN7zz88S432hZJ8M095kI=
+github.com/Zyko0/purego-gen v0.0.0-20250727121216-3bcd331a1e0c/go.mod h1:xpUxPkAb7v0Ffn/NGp1XpD+tZly4dpSPI7DTAFT37es=
+github.com/ebitengine/purego v0.10.1 h1:dewVBCBT2GaMu1SrNTYxQhgQBethzfhiwvZiLGP/qyY=
+github.com/ebitengine/purego v0.10.1/go.mod h1:iIjxzd6CiRiOG0UyXP+V1+jWqUXVjPKLAI0mRfJZTmQ=
+golang.org/x/sys v0.45.0 h1:dO4czNzziLiiXplLQgBCEpCvXQ3dnkn0SdaZSYdQ+FY=
+golang.org/x/sys v0.45.0/go.mod h1:4GL1E5IUh+htKOUEOaiffhrAeqysfVGipDYzABqnCmw=
