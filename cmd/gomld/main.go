@@ -26,7 +26,7 @@ type Config struct {
 func main() {
 	userConfigDir, err := os.UserConfigDir()
 	if err != nil {
-		log.Fatalf(err.Error())
+		userConfigDir = "/etc"
 	}
 	configPath := path.Join(userConfigDir, "goml.toml")
 

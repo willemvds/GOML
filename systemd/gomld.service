@@ -1,0 +1,17 @@
+[Unit]
+Description=Get Off My Lawn - Service Daemon
+Documentation=https://github.com/willemvds/GOML
+
+[Service]
+User=willem
+Environment="SDL_AUDIODRIVER=pipewire"
+Environment="XDG_RUNTIME_DIR=/run/user/1000"
+Environment="PIPEWIRE_RUNTIME_DIR=/run/user/1000"
+WorkingDirectory="/home/willem/projects/GOML/cmd/gomld"
+ExecStart="/home/willem/projects/GOML/cmd/gomld/gomld"
+Restart=on-failure
+Type=exec
+
+[Install]
+WantedBy=multi-user.target
+
