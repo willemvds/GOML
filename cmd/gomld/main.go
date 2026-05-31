@@ -18,9 +18,15 @@ import (
 	"vds.io/goml/siren"
 )
 
+type OnOffWindow struct {
+	On  time.Time
+	Off time.Time
+}
+
 type Config struct {
-	Siren  string
-	Volume float32
+	Siren    string
+	Volume   float32
+	Schedule []OnOffWindow
 }
 
 func main() {
@@ -52,6 +58,13 @@ func main() {
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
+
+	schedule := api.Schedule{}
+	for _, onOffWindow := range appConfig.Schedule {
+		schedule.AddOnEvent(api.NewTimeOfDay(uint(onOffWindow.On.Hour()), uint(onOffWindow.On.Minute())))
+		schedule.AddOffEvent(api.NewTimeOfDay(uint(onOffWindow.Off.Hour()), uint(onOffWindow.Off.Minute())))
+	}
+	fmt.Println(schedule)
 
 	apiServer := api.NewServer(alarm)
 	rc, err := apiServer.StartListening()

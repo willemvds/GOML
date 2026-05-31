@@ -11,6 +11,15 @@ import (
 
 var ErrWorkInProgress = errors.New("work in progress")
 
+type Server struct {
+	httpServer     http.Server
+	workInProgress bool
+	listenResult   chan error
+
+	alarm    *siren.Siren
+	schedule []TimeOfDay
+}
+
 func NewServer(alarm *siren.Siren) *Server {
 	s := Server{
 		httpServer: http.Server{
@@ -22,14 +31,6 @@ func NewServer(alarm *siren.Siren) *Server {
 	s.httpServer.Handler = &s
 
 	return &s
-}
-
-type Server struct {
-	httpServer     http.Server
-	workInProgress bool
-	listenResult   chan error
-
-	alarm *siren.Siren
 }
 
 func (server *Server) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
