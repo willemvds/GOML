@@ -60,6 +60,7 @@ func (siren *Siren) Start() (chan error, error) {
 			av, err := audioStream.Available()
 			if err != nil {
 				rc <- err
+				return
 			}
 			if av > 0 {
 				sdl.Delay(100)
@@ -71,5 +72,5 @@ func (siren *Siren) Start() (chan error, error) {
 		close(rc)
 	}(resultChan)
 
-	return nil, nil
+	return resultChan, nil
 }
