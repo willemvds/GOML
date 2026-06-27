@@ -1,8 +1,12 @@
 package siren
 
 import (
+	"errors"
+
 	"github.com/Zyko0/go-sdl3/sdl"
 )
+
+var ErrNoAudioPlaybackDevices = errors.New("no audio playback devices available")
 
 type Siren struct {
 	wavBytes   []byte
@@ -30,6 +34,9 @@ func (siren *Siren) Start() (chan error, error) {
 	devices, err := sdl.GetAudioPlaybackDevices()
 	if err != nil {
 		return nil, err
+	}
+	if len(devices) == 0 {
+		return nil, ErrNoAudioPlaybackDevices
 	}
 
 	audioStream := devices[0].OpenAudioDeviceStream(&siren.wavSpec, 0)
