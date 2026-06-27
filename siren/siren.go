@@ -5,9 +5,10 @@ import (
 )
 
 type Siren struct {
-	wavBytes []byte
-	wavSpec  sdl.AudioSpec
-	volume   float32
+	wavBytes   []byte
+	wavSpec    sdl.AudioSpec
+	volume     float32
+	soundLoops uint
 }
 
 func New(path string, volume float32) (*Siren, error) {
@@ -18,9 +19,10 @@ func New(path string, volume float32) (*Siren, error) {
 	}
 
 	return &Siren{
-		wavBytes: wav,
-		wavSpec:  wavSpec,
-		volume:   volume,
+		wavBytes:   wav,
+		wavSpec:    wavSpec,
+		volume:     volume,
+		soundLoops: 24,
 	}, nil
 }
 
@@ -37,7 +39,7 @@ func (siren *Siren) Start() (chan error, error) {
 	}
 	audioStream.SetGain(siren.volume)
 
-	for range 24 {
+	for range siren.soundLoops {
 		err = audioStream.PutData(siren.wavBytes)
 		if err != nil {
 			return nil, err
