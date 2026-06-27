@@ -33,7 +33,13 @@ type Server struct {
 }
 
 func (server *Server) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
-	r, _ := server.alarm.Start()
+	r, err := server.alarm.Start()
+	if err != nil {
+		resp.WriteHeader(http.StatusInternalServerError)
+		fmt.Fprintf(resp, "%s", err)
+		return
+	}
+
 	go func() {
 		err := <-r
 		fmt.Println(err)
