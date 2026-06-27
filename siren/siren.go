@@ -35,6 +35,7 @@ func (siren *Siren) Start() (chan error, error) {
 	audioStream := devices[0].OpenAudioDeviceStream(&siren.wavSpec, 0)
 	err = audioStream.ResumeDevice()
 	if err != nil {
+		audioStream.Destroy()
 		return nil, err
 	}
 	audioStream.SetGain(siren.volume)
@@ -42,16 +43,19 @@ func (siren *Siren) Start() (chan error, error) {
 	for range siren.soundLoops {
 		err = audioStream.PutData(siren.wavBytes)
 		if err != nil {
+			audioStream.Destroy()
 			return nil, err
 		}
 	}
 	err = audioStream.Flush()
 	if err != nil {
+		audioStream.Destroy()
 		return nil, err
 	}
 
 	resultChan := make(chan error)
 	go func(rc chan error) {
+		defer audioStream.Destroy()
 		for {
 			av, err := audioStream.Available()
 			if err != nil {
